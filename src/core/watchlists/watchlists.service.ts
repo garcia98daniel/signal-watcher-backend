@@ -1,4 +1,4 @@
-import prisma from '@/lib/prisma';
+import prisma from '../../lib/prisma';
 import { TermType } from '@prisma/client';
 
 interface CreateWatchlistInput {

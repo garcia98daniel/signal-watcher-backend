@@ -1,5 +1,5 @@
-import prisma from '@/lib/prisma';
-import { AIAnalysis, CreateEventForm, SeverityLevel } from '@/types/events.types'; // Usaremos los tipos del frontend para consistencia
+import prisma from '../../lib/prisma';
+import { AIAnalysis, CreateEventForm, SeverityLevel } from '../../types/events.types'; // Usaremos los tipos del frontend para consistencia
 
 // Lógica de simulación de IA (movida al backend)
 const keywords: { [key in SeverityLevel]: string[] } = {

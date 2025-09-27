@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import * as eventService from '@/core/events/events.service';
+import * as eventService from '../../core/events/events.service';
 
 export const getAllEvents = async (req: Request, res: Response) => {
   try {

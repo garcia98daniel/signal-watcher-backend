@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import * as watchlistService from '@/core/watchlists/watchlists.service';
+import * as watchlistService from '../../core/watchlists/watchlists.service';
 
 export const getAllWatchlists = async (req: Request, res: Response) => {
   try {
