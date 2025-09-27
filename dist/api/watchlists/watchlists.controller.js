@@ -34,7 +34,7 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteSingleWatchlist = exports.createNewWatchlist = exports.getAllWatchlists = void 0;
-const watchlistService = __importStar(require("@/core/watchlists/watchlists.service"));
+const watchlistService = __importStar(require("../../core/watchlists/watchlists.service"));
 const getAllWatchlists = async (req, res) => {
     try {
         const watchlists = await watchlistService.getWatchlists();

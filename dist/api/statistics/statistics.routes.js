@@ -34,7 +34,7 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const StatisticsController = __importStar(require("@/api/statistics/statistics.controller"));
+const StatisticsController = __importStar(require("./statistics.controller"));
 const router = (0, express_1.Router)();
 router.get('/', StatisticsController.getStatistics);
 exports.default = router;

@@ -34,7 +34,7 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.simulateNewEvent = exports.getAllEvents = void 0;
-const eventService = __importStar(require("@/core/events/events.service"));
+const eventService = __importStar(require("../../core/events/events.service"));
 const getAllEvents = async (req, res) => {
     try {
         const events = await eventService.getEvents();

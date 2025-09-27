@@ -34,7 +34,7 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getStatistics = void 0;
-const StatisticsService = __importStar(require("@/api/statistics/statistics.service"));
+const StatisticsService = __importStar(require("./statistics.service"));
 const getStatistics = async (req, res) => {
     try {
         const stats = await StatisticsService.getAppStatistics();
