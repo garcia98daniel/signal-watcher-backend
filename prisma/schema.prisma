@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum SeverityLevel {
+  LOW
+  MED
+  HIGH
+  CRITICAL
+}
+
+enum EventStatus {
+  PENDING
+  ANALYZED
+  RESOLVED
+  DISMISSED
+}
+
+enum TermType {
+  BRAND
+  DOMAIN
+  KEYWORD
+  OTHER
+}
+
+model Watchlist {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  terms  WatchlistTerm[]
+  events SecurityEvent[]
+}
+
+model WatchlistTerm {
+  id        String   @id @default(cuid())
+  term      String
+  type      TermType @default(KEYWORD)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  watchlist   Watchlist @relation(fields: [watchlistId], references: [id], onDelete: Cascade)
+  watchlistId String
+}
+
+model SecurityEvent {
+  id           String   @id @default(cuid())
+  title        String
+  description  String
+  source       String
+  matchedTerms String[]
+  severity     SeverityLevel?
+  status       EventStatus @default(PENDING)
+  rawData      Json?    @default("{}")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  watchlist   Watchlist  @relation(fields: [watchlistId], references: [id], onDelete: Cascade)
+  watchlistId String
+  aiAnalysis  AIAnalysis? 
+}
+
+model AIAnalysis {
+  id               String   @id @default(cuid())
+  summary          String
+  severity         SeverityLevel
+  confidence       Float
+  suggestedActions String[]
+  reasoning        String
+  processedAt      DateTime @default(now())
+  correlationId    String   @unique
+
+  event     SecurityEvent @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  eventId   String        @unique
+}
